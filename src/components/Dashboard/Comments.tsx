@@ -65,7 +65,7 @@ const Comments: React.FC<Props> = ({ selectedOptions }) => {
     }
 
     useEffect(() => {
-        handleGettingComments(selectedOptions.value)
+        // handleGettingComments(selectedOptions.value)
         console.log("selectedOptions", selectedOptions)
     }, [selectedOptions])
 

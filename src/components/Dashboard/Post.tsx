@@ -47,7 +47,7 @@ const Posts: React.FC<Props> = ({ selectedOptions }) => {
 
     useEffect(() => {
         console.log("selectedOptions", selectedOptions)
-        handleGettingPosts(selectedOptions.value)
+        // handleGettingPosts(selectedOptions.value)
     }, [selectedOptions])
 
     const [state, dispatch] = useReducer(appReducer, initialState);
