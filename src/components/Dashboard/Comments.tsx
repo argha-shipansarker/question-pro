@@ -10,7 +10,7 @@ import {
 } from "../../utils/interface";
 
 interface Props {
-    selectedOptions: SelectDropdown;
+    selectedOptions?: SelectDropdown;
 }
 
 interface AppState {
