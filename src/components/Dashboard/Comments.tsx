@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useRef } from "react"
+import React, { useEffect, useReducer, useRef } from "react"
 import {
     GetComments,
 } from "../../service-pattern/api-endpoint-service"
@@ -84,4 +84,6 @@ const Comments: React.FC<Props> = ({ selectedOptions }) => {
     )
 }
 
-export default Comments
+export default React.memo(Comments, (prevProps, nextProps) => {
+    return prevProps.selectedOptions?.value === nextProps.selectedOptions?.value;
+})

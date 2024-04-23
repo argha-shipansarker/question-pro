@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useRef } from "react"
+import React, { useEffect, useReducer, useRef } from "react"
 import {
     GetPosts,
 } from "../../service-pattern/api-endpoint-service"
@@ -83,4 +83,6 @@ const Posts: React.FC<Props> = ({ selectedOptions }) => {
     )
 }
 
-export default Posts
+export default React.memo(Posts, (prevProps, nextProps) => {
+    return prevProps.selectedOptions?.value === nextProps.selectedOptions?.value;
+})
