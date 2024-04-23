@@ -1,5 +1,4 @@
 import {
-    // Outlet, 
     Route, Routes, useLocation, useNavigate
 } from "react-router-dom";
 import DashboardHeader from "./DashboardHeader";
@@ -23,8 +22,10 @@ function DashboardLayout() {
 
 
     useEffect(() => {
-        navigate('/dashboard/posts');
-    }, []);
+        if (location.pathname == "/dashboard") {
+            navigate('/dashboard/posts');
+        }
+    }, [location.pathname]);
 
     const handleGettingDataForSelect = async () => {
         setSelectedOptions({ label: "All", value: -1 })
@@ -43,10 +44,6 @@ function DashboardLayout() {
         }
     }
 
-    // useEffect(() => {
-    //     console.log("options", selectedOptions)
-    // }, [selectedOptions])
-
     useEffect(() => {
         let pageName = location.pathname.split("/")[2]
         if (pageName) {
@@ -58,7 +55,6 @@ function DashboardLayout() {
     return (
         <div style={{ position: "relative" }}>
             <DashboardHeader />
-            {/* <p>common Select</p> */}
             <div style={{ display: "flex", columnGap: "200px", alignItems: "center" }}>
                 <p style={{ fontWeight: "bold", fontSize: "20px", margin: 0 }}>{pageName}</p>
                 <div style={{ width: "400px" }}>
@@ -69,10 +65,6 @@ function DashboardLayout() {
                     />
                 </div>
             </div>
-
-
-
-            {/* <Outlet /> */}
 
             <Routes>
                 <Route path="posts" element={<Posts selectedOptions={selectedOptions} />} />
