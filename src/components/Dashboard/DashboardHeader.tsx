@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 function DashboardHeader() {
     return (
-        <div style={{ display: "flex", columnGap: "16px", marginTop: "16px" }}>
+        <div style={{ display: "flex", columnGap: "16px", marginTop: "16px", marginBottom: "16px" }}>
             <NavLink
                 to={"/dashboard/posts"}
                 style={({ isActive }) => {

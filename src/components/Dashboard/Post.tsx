@@ -100,8 +100,8 @@ const Posts: React.FC<Props> = ({ selectedOptions }) => {
     // }
 
     return (
-        <div>
-            posts
+        <div style={{ marginTop: "30px" }}>
+            {/* <p style={{ fontWeight: "bold", fontSize: "20px" }}>Posts</p> */}
             {/* <p>internal Select</p>
             <Select
                 options={state.users}

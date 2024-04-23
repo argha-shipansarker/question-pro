@@ -97,8 +97,8 @@ const Comments: React.FC<Props> = ({ selectedOptions }) => {
     // }
 
     return (
-        <div>
-            Comments
+        <div style={{ marginTop: "30px" }}>
+            {/* <p style={{ fontWeight: "bold", fontSize: "20px" }}>Comments</p> */}
             {/* <p>internal Select</p>
             <Select
                 options={state.posts}

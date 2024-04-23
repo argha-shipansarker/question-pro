@@ -17,6 +17,7 @@ function DashboardLayout() {
 
     const [options, setOptions] = useState<SelectDropdown[]>([]);
     const [selectedOptions, setSelectedOptions] = useState<SelectDropdown>({ label: "All", value: -1 })
+    const [pageName, setPageName] = useState("")
 
 
 
@@ -47,18 +48,29 @@ function DashboardLayout() {
     // }, [selectedOptions])
 
     useEffect(() => {
+        let pageName = location.pathname.split("/")[2]
+        if (pageName) {
+            setPageName(pageName.charAt(0).toUpperCase() + pageName.slice(1))
+        }
         handleGettingDataForSelect()
     }, [location.pathname])
 
     return (
-        <>
+        <div style={{ position: "relative" }}>
             <DashboardHeader />
-            <p>common Select</p>
-            <Select
-                options={options}
-                value={selectedOptions}
-                onChange={selectedOption => handleSettingOption(selectedOption)}
-            />
+            {/* <p>common Select</p> */}
+            <div style={{ display: "flex", columnGap: "200px", alignItems: "center" }}>
+                <p style={{ fontWeight: "bold", fontSize: "20px", margin: 0 }}>{pageName}</p>
+                <div style={{ width: "400px" }}>
+                    <Select
+                        options={options}
+                        value={selectedOptions}
+                        onChange={selectedOption => handleSettingOption(selectedOption)}
+                    />
+                </div>
+            </div>
+
+
 
             {/* <Outlet /> */}
 
@@ -66,7 +78,7 @@ function DashboardLayout() {
                 <Route path="posts" element={<Posts selectedOptions={selectedOptions} />} />
                 <Route path="comments" element={<Comments selectedOptions={selectedOptions} />} />
             </Routes>
-        </>
+        </div>
     )
 }
 
