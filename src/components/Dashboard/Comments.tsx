@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react"
+import { useEffect, useReducer, useRef } from "react"
 // import Select from 'react-select'
 import {
     GetComments,
@@ -45,6 +45,8 @@ function appReducer(state: AppState, action: Action): AppState {
 
 const Comments: React.FC<Props> = ({ selectedOptions }) => {
 
+    const isInitialMount = useRef(true);
+
     const [state, dispatch] = useReducer(appReducer, initialState);
 
     const handleGettingComments = async (postId: number) => {
@@ -65,9 +67,15 @@ const Comments: React.FC<Props> = ({ selectedOptions }) => {
     // }
 
     useEffect(() => {
-        if (selectedOptions?.value) {
-            handleGettingComments(selectedOptions.value)
+        if (isInitialMount.current) {
+            handleGettingComments(-1)
+            isInitialMount.current = false;
+        } else {
+            if (selectedOptions?.value) {
+                handleGettingComments(selectedOptions.value)
+            }
         }
+
         console.log("selectedOptions", selectedOptions)
     }, [selectedOptions])
 

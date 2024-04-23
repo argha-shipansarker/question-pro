@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react"
+import { useEffect, useReducer, useRef } from "react"
 // import Select from 'react-select'
 import {
     GetPosts,
@@ -45,11 +45,22 @@ function appReducer(state: AppState, action: Action): AppState {
 
 const Posts: React.FC<Props> = ({ selectedOptions }) => {
 
+    const isInitialMount = useRef(true);
+
     useEffect(() => {
         console.log("selectedOptions", selectedOptions)
-        if (selectedOptions?.value) {
-            handleGettingPosts(selectedOptions.value)
+        if (isInitialMount.current) {
+            handleGettingPosts(-1)
+            isInitialMount.current = false;
+        } else {
+            if (selectedOptions?.value) {
+                handleGettingPosts(selectedOptions.value)
+            }
         }
+        // }
+        // if (selectedOptions?.value) {
+        //     handleGettingPosts(selectedOptions.value)
+        // }
     }, [selectedOptions])
 
     const [state, dispatch] = useReducer(appReducer, initialState);
