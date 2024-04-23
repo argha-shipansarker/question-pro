@@ -1,12 +1,12 @@
 import { useEffect, useReducer } from "react"
-import Select from 'react-select'
+// import Select from 'react-select'
 import {
     GetPosts,
-    GetUsers
+    // GetUsers
 } from "../../service-pattern/api-endpoint-service"
 import {
     Post, SelectDropdown,
-    User
+    // User
 } from "../../utils/interface";
 
 interface Props {
@@ -47,7 +47,9 @@ const Posts: React.FC<Props> = ({ selectedOptions }) => {
 
     useEffect(() => {
         console.log("selectedOptions", selectedOptions)
-        // handleGettingPosts(selectedOptions.value)
+        if (selectedOptions?.value) {
+            handleGettingPosts(selectedOptions.value)
+        }
     }, [selectedOptions])
 
     const [state, dispatch] = useReducer(appReducer, initialState);
@@ -64,37 +66,37 @@ const Posts: React.FC<Props> = ({ selectedOptions }) => {
         dispatch({ type: 'SET_POSTS', payload: postResult.data });
     }
 
-    const handleGettingUsers = async () => {
-        const userResult = await GetUsers()
-        dispatch({ type: 'SET_USERS', payload: [{ label: "All", value: -1 }, ...userResult.data.map((user: User) => ({ label: user.name, value: user.id }))] });
-    }
+    // const handleGettingUsers = async () => {
+    //     const userResult = await GetUsers()
+    //     dispatch({ type: 'SET_USERS', payload: [{ label: "All", value: -1 }, ...userResult.data.map((user: User) => ({ label: user.name, value: user.id }))] });
+    // }
 
-    useEffect(() => {
-        handleGettingPosts(-1)
-        handleGettingUsers()
-    }, [])
+    // useEffect(() => {
+    //     handleGettingPosts(-1)
+    //     handleGettingUsers()
+    // }, [])
 
-    const handleSettingUser = (selectedOption: SelectDropdown | null) => {
-        if (selectedOption) {
-            dispatch({ type: 'SET_USER', payload: selectedOption });
+    // const handleSettingUser = (selectedOption: SelectDropdown | null) => {
+    //     if (selectedOption) {
+    //         dispatch({ type: 'SET_USER', payload: selectedOption });
 
-            if (selectedOption.value < 0) {
-                handleGettingPosts(-1)
-            } else {
-                handleGettingPosts(selectedOption.value)
-            }
-        }
-    }
+    //         if (selectedOption.value < 0) {
+    //             handleGettingPosts(-1)
+    //         } else {
+    //             handleGettingPosts(selectedOption.value)
+    //         }
+    //     }
+    // }
 
     return (
         <div>
             posts
-            <p>internal Select</p>
+            {/* <p>internal Select</p>
             <Select
                 options={state.users}
                 value={state.selectedUser}
                 onChange={selectedOption => handleSettingUser(selectedOption)}
-            />
+            /> */}
             {
                 state.posts.map((post, index) => (
                     <div key={index} style={{ border: "1px solid grey", padding: "4px", maxWidth: "600px", marginBottom: "6px" }}>
