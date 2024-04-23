@@ -7,7 +7,7 @@ function Header() {
     const userInfo = useSelector((state: RootState) => state.userInfo)
 
     return (
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", position: "relative" }}>
             <div style={{ display: "flex", columnGap: "16px" }}>
                 <NavLink
                     to={"/"}
@@ -54,7 +54,7 @@ function Header() {
                 </NavLink>
             </div>
 
-            <div>
+            <div style={{ position: "absolute", right: 0 }}>
                 <NavLink
                     to={"/user"}
                     style={{
