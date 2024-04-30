@@ -1,12 +1,10 @@
-import type { RootState } from '../../store'
-import { useSelector, useDispatch } from 'react-redux'
-import { updateEmail, updateName } from '../../store/userInfoSlice'
+import { useContextApi } from "../../store/AppContext";
+
 
 function User() {
 
-    const userInfo = useSelector((state: RootState) => state.userInfo)
+    const { userInfo, setUserInfo } = useContextApi();
 
-    const dispatch = useDispatch()
 
     return (
         <div>
@@ -14,14 +12,14 @@ function User() {
                 type='text'
                 placeholder='Name'
                 value={userInfo.name}
-                onChange={event => dispatch(updateName(event.target.value))}
+                onChange={event => setUserInfo({ ...userInfo, name: event.target.value })}
             />
 
             <input
                 type='text'
                 placeholder='Email'
                 value={userInfo.email}
-                onChange={event => dispatch(updateEmail(event.target.value))}
+                onChange={event => setUserInfo({ ...userInfo, email: event.target.value })}
             />
         </div>
     )

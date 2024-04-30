@@ -1,10 +1,9 @@
 import { NavLink } from "react-router-dom"
-import type { RootState } from '../../store'
-import { useSelector } from 'react-redux'
+import { useContextApi } from "../../store/AppContext";
 
 function Header() {
 
-    const userInfo = useSelector((state: RootState) => state.userInfo)
+    const { userInfo } = useContextApi();
 
     return (
         <div style={{ display: "flex", justifyContent: "space-between", position: "relative" }}>
