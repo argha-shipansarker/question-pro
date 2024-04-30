@@ -18,9 +18,6 @@ function DashboardLayout() {
     const [selectedOptions, setSelectedOptions] = useState<SelectDropdown>({ label: "All", value: -1 })
     const [pageName, setPageName] = useState("")
 
-
-
-
     useEffect(() => {
         if (location.pathname == "/dashboard") {
             navigate('/dashboard/posts');
@@ -67,8 +64,8 @@ function DashboardLayout() {
             </div>
 
             <Routes>
-                <Route path="posts" element={<Posts selectedOptions={selectedOptions} />} />
-                <Route path="comments" element={<Comments selectedOptions={selectedOptions} />} />
+                <Route path="posts" element={<Posts {...{ selectedOptions, pageName }} />} />
+                <Route path="comments" element={<Comments {...{ selectedOptions, pageName }} />} />
             </Routes>
         </div>
     )

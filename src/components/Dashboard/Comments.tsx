@@ -8,6 +8,7 @@ import {
 
 interface Props {
     selectedOptions?: SelectDropdown;
+    pageName?: string;
 }
 
 interface AppState {
@@ -30,22 +31,24 @@ function appReducer(state: AppState, action: Action): AppState {
     }
 }
 
-const Comments: React.FC<Props> = ({ selectedOptions }) => {
+const Comments: React.FC<Props> = ({ selectedOptions, pageName }) => {
 
     const isInitialMount = useRef(true);
 
     const [state, dispatch] = useReducer(appReducer, initialState);
 
     const handleGettingComments = async (postId: number) => {
-        let commentResult = {
-            data: []
+        if(pageName == "Comments") {
+            let commentResult = {
+                data: []
+            }
+            if (postId < 0) {
+                commentResult = await GetComments()
+            } else {
+                commentResult = await GetComments({ postId })
+            }
+            dispatch({ type: 'SET_COMMENTS', payload: commentResult.data });
         }
-        if (postId < 0) {
-            commentResult = await GetComments()
-        } else {
-            commentResult = await GetComments({ postId })
-        }
-        dispatch({ type: 'SET_COMMENTS', payload: commentResult.data });
     }
 
     useEffect(() => {
@@ -74,6 +77,4 @@ const Comments: React.FC<Props> = ({ selectedOptions }) => {
     )
 }
 
-export default React.memo(Comments, (prevProps, nextProps) => {
-    return prevProps.selectedOptions?.value === nextProps.selectedOptions?.value;
-})
+export default Comments

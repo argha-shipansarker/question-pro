@@ -8,6 +8,7 @@ import {
 
 interface Props {
     selectedOptions?: SelectDropdown;
+    pageName?: string
 }
 
 interface AppState {
@@ -30,7 +31,7 @@ function appReducer(state: AppState, action: Action): AppState {
     }
 }
 
-const Posts: React.FC<Props> = ({ selectedOptions }) => {
+const Posts: React.FC<Props> = ({ selectedOptions, pageName }) => {
 
     const isInitialMount = useRef(true);
 
@@ -48,15 +49,17 @@ const Posts: React.FC<Props> = ({ selectedOptions }) => {
     const [state, dispatch] = useReducer(appReducer, initialState);
 
     const handleGettingPosts = async (userId: number) => {
-        let postResult = {
-            data: []
+        if(pageName == "Posts"){
+            let postResult = {
+                data: []
+            }
+            if (userId < 0) {
+                postResult = await GetPosts()
+            } else {
+                postResult = await GetPosts({ userId })
+            }
+            dispatch({ type: 'SET_POSTS', payload: postResult.data });
         }
-        if (userId < 0) {
-            postResult = await GetPosts()
-        } else {
-            postResult = await GetPosts({ userId })
-        }
-        dispatch({ type: 'SET_POSTS', payload: postResult.data });
     }
 
     return (
@@ -73,6 +76,4 @@ const Posts: React.FC<Props> = ({ selectedOptions }) => {
     )
 }
 
-export default React.memo(Posts, (prevProps, nextProps) => {
-    return prevProps.selectedOptions?.value === nextProps.selectedOptions?.value;
-})
+export default Posts
