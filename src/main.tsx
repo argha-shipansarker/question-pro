@@ -28,7 +28,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <Route index element={<Home />} />
           <Route path='user' element={<User />} />
           <Route path='component' element={<MyComponent />} />
-          <Route path="dashboard" element={<DashboardLayout />}>
+          <Route path="dashboard/*" element={<DashboardLayout />}>
             <Route path="posts" element={<Posts />} />
             <Route path="comments" element={<Comments />} />
           </Route>
