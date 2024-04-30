@@ -12,29 +12,19 @@ interface Props {
 
 interface AppState {
     posts: Post[];
-    users: SelectDropdown[];
-    selectedUser: SelectDropdown
 }
 
 type Action =
     | { type: 'SET_POSTS'; payload: Post[] }
-    | { type: 'SET_USERS'; payload: SelectDropdown[] }
-    | { type: 'SET_USER'; payload: SelectDropdown };
 
 const initialState: AppState = {
     posts: [],
-    users: [],
-    selectedUser: { label: "All", value: -1 }
 };
 
 function appReducer(state: AppState, action: Action): AppState {
     switch (action.type) {
         case 'SET_POSTS':
             return { ...state, posts: action.payload };
-        case 'SET_USERS':
-            return { ...state, users: action.payload };
-        case 'SET_USER':
-            return { ...state, selectedUser: action.payload };
         default:
             return state;
     }

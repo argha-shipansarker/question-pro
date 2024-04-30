@@ -12,29 +12,19 @@ interface Props {
 
 interface AppState {
     comments: Comment[];
-    posts: SelectDropdown[];
-    selectedPost: SelectDropdown
 }
 
 type Action =
     | { type: 'SET_COMMENTS'; payload: Comment[] }
-    | { type: 'SET_POSTS'; payload: SelectDropdown[] }
-    | { type: 'SET_POST'; payload: SelectDropdown };
 
 const initialState: AppState = {
     comments: [],
-    posts: [],
-    selectedPost: { label: "All", value: -1 }
 };
 
 function appReducer(state: AppState, action: Action): AppState {
     switch (action.type) {
         case 'SET_COMMENTS':
             return { ...state, comments: action.payload };
-        case 'SET_POSTS':
-            return { ...state, posts: action.payload };
-        case 'SET_POST':
-            return { ...state, selectedPost: action.payload };
         default:
             return state;
     }
