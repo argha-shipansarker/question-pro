@@ -18,6 +18,7 @@ import AppProvider from './store/AppContext.tsx';
 import User from './components/User/User.tsx';
 import MyComponent from './components/MyComponent/MyComponent.tsx';
 import Comments from './components/Dashboard/Comments.tsx';
+import Button from './ReusableComponents/Button.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -27,7 +28,17 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path='user' element={<User />} />
-            <Route path='component' element={<MyComponent />} />
+            <Route path='component'
+              element={
+                <MyComponent>
+                  <div style={{ display: "flex", columnGap: "14px", alignItems: "center", userSelect: "none" }}>
+                    <div>this is a div</div>
+                    <Button style={{ backgroundColor: "green", color: "white" }}>button Active</Button>
+                    <Button style={{ backgroundColor: "red", color: "white" }}>button Inactive</Button>
+                  </div>
+                </MyComponent>
+              }
+            />
             <Route path="dashboard/*" element={<DashboardLayout />}>
               <Route path="posts" element={<Posts />} />
               <Route path="comments" element={<Comments />} />
